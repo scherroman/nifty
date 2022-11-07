@@ -1,0 +1,11 @@
+{
+    "extends": "solhint:recommended",
+    "rules": {
+      "func-visibility": ["error", { "ignoreConstructors": true }],
+      "compiler-version": "off",
+      "avoid-low-level-calls": "off",
+      "quotes": "off",
+      "not-rely-on-time": "off"
+    }
+}
+  
