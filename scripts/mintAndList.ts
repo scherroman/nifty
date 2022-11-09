@@ -1,14 +1,12 @@
 import { ethers } from 'hardhat'
 import { BigNumber } from 'ethers'
 
-import { BasicNft, NftMarketplace } from '../typechain-types'
+import { BasicNft, Nifty } from '../typechain-types'
 
 const NFT_LISTING_PRICE = ethers.utils.parseEther('0.1')
 
 async function main(): Promise<void> {
-    let nftMarketplace = await ethers.getContract<NftMarketplace>(
-        'NftMarketplace'
-    )
+    let nifty = await ethers.getContract<Nifty>('Nifty')
     let basicNft = await ethers.getContract<BasicNft>('BasicNft')
 
     console.log('Minting NFT...')
@@ -29,9 +27,9 @@ async function main(): Promise<void> {
 
     console.log('Listing NFT...')
 
-    await (await basicNft.approve(nftMarketplace.address, nftId)).wait(1)
+    await (await basicNft.approve(nifty.address, nftId)).wait(1)
     await (
-        await nftMarketplace.listNft(basicNft.address, nftId, NFT_LISTING_PRICE)
+        await nifty.listNft(basicNft.address, nftId, NFT_LISTING_PRICE)
     ).wait(1)
 
     console.log('NFT listed!')

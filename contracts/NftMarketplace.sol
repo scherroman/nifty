@@ -3,11 +3,11 @@ pragma solidity 0.8.17;
 
 import {IERC721} from '@openzeppelin/contracts/token/ERC721/IERC721.sol';
 
-contract NftMarketplace {
+contract Nifty {
     error ListingPriceNotProvided();
     error ListingPriceNotPaid(uint price);
     error NotOwnerOfNft();
-    error NftNotApprovedForMarketPlace();
+    error NftNotApprovedForMarketplace();
     error NftAlreadyListed();
     error NftNotListed();
     error NoProceedsToWithdraw();
@@ -80,7 +80,7 @@ contract NftMarketplace {
 
     modifier nftIsApproved(address nftAddress, uint nftId) {
         if (IERC721(nftAddress).getApproved(nftId) != address(this)) {
-            revert NftNotApprovedForMarketPlace();
+            revert NftNotApprovedForMarketplace();
         }
         _;
     }

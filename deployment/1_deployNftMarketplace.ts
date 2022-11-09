@@ -17,7 +17,7 @@ let deploy: DeployFunction = async ({
     deployments.log('-------------------------')
 
     let _arguments: string[] = []
-    let nftMarketplace = await deployments.deploy('NftMarketplace', {
+    let nifty = await deployments.deploy('Nifty', {
         from: deployer,
         args: [],
         log: true,
@@ -25,10 +25,10 @@ let deploy: DeployFunction = async ({
     })
 
     if (!DEVELOPMENT_CHAINS.includes(network.name)) {
-        await verify(nftMarketplace.address, _arguments)
+        await verify(nifty.address, _arguments)
     }
 }
 
-deploy.tags = ['all', 'nft-marketplace']
+deploy.tags = ['all', 'nifty']
 
 export default deploy

@@ -1,5 +1,5 @@
-# NFT Marketplace
+# Nifty
 
 ## Overview
 
-This NFT marketplace allows users to list nfts, buy nfts, cancel listings, update listings, and withdraw proceeds.
+Nifty allows users to list nfts, buy nfts, cancel listings, update listings, and withdraw proceeds.
