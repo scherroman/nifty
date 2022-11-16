@@ -17,7 +17,7 @@ if (DEVELOPMENT_CHAINS.includes(network.name)) {
         let nftAddress: string
         let nftId: BigNumber
         beforeEach(async () => {
-            await deployments.fixture(['tests', 'all'])
+            await deployments.fixture(['tests', 'nifty'])
             nifty = await ethers.getContract('Nifty', deployer)
             userNifty = await ethers.getContract<Nifty>('Nifty', user)
             ;({ deployer, user } = await getNamedAccounts())

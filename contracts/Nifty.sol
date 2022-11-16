@@ -23,11 +23,6 @@ contract Nifty {
         public listingByNftIdByNftAddress;
     mapping(address => uint) public proceeds;
 
-    // address[] public listedNftAddresses;
-    // mapping(address => uint[]) public listedNftIdsByNftAddress;
-    // mapping(address => uint) private listedNftAddressIndexByAddress;
-    // mapping(uint => uint) private listedNftIdIndexById;
-
     event NftListed(
         address indexed nftAddress,
         uint indexed nftId,

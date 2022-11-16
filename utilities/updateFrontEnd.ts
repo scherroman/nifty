@@ -6,9 +6,12 @@ import { Nifty } from '../typechain-types'
 
 // const TYPES_FOLDER = `typechain-types`
 const FRONT_END_NIFTY_CONTRACT_FOLDER = '../nifty-web/contracts/nifty'
-const FRONT_END_ADDRESSES_FILE = `${FRONT_END_NIFTY_CONTRACT_FOLDER}/addresses.json`
-const FRONT_END_ABI_FILE = `${FRONT_END_NIFTY_CONTRACT_FOLDER}/abi.ts`
+const FRONT_END_NIFTY_ADDRESSES_FILE = `${FRONT_END_NIFTY_CONTRACT_FOLDER}/addresses.json`
+const FRONT_END_NIFTY_ABI_FILE = `${FRONT_END_NIFTY_CONTRACT_FOLDER}/abi.ts`
 // const FRONT_END_TYPES_FOLDER = `${FRONT_END_NIFTY_CONTRACT_FOLDER}/types`
+
+const FRONT_END_ERC721_INTERFACE_FOLDER = '../nifty-web/contracts/ierc721'
+const FRONT_END_ERC721_ABI_FILE = `${FRONT_END_ERC721_INTERFACE_FOLDER}/abi.ts`
 
 const ContractAddressesByChainId = zod.record(zod.string(), zod.string())
 const AbiString = zod.string()
@@ -33,7 +36,9 @@ async function updateContractAddresses(): Promise<void> {
     let contractAddressesByChainId: ContractAddressesByChainId
     try {
         contractAddressesByChainId = ContractAddressesByChainId.parse(
-            JSON.parse(await fs.readFile(FRONT_END_ADDRESSES_FILE, 'utf8'))
+            JSON.parse(
+                await fs.readFile(FRONT_END_NIFTY_ADDRESSES_FILE, 'utf8')
+            )
         )
     } catch (error) {
         contractAddressesByChainId = {}
@@ -48,7 +53,7 @@ async function updateContractAddresses(): Promise<void> {
     }
 
     await fs.outputFile(
-        FRONT_END_ADDRESSES_FILE,
+        FRONT_END_NIFTY_ADDRESSES_FILE,
         JSON.stringify(contractAddressesByChainId)
     )
 }
@@ -59,7 +64,14 @@ async function updateAbi(): Promise<void> {
         nifty.interface.format(ethers.utils.FormatTypes.json)
     )
     let abiModuleString = `export default ${abi} as const`
-    await fs.outputFile(FRONT_END_ABI_FILE, abiModuleString)
+    await fs.outputFile(FRONT_END_NIFTY_ABI_FILE, abiModuleString)
+
+    let iErc721 = await ethers.getContract('BasicNft')
+    abi = AbiString.parse(
+        iErc721.interface.format(ethers.utils.FormatTypes.json)
+    )
+    abiModuleString = `export default ${abi} as const`
+    await fs.outputFile(FRONT_END_ERC721_ABI_FILE, abiModuleString)
 }
 
 // async function updateTypes(): Promise<void> {
