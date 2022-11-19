@@ -16,10 +16,10 @@ let deploy: DeployFunction = async ({
 
     deployments.log('-------------------------')
 
-    let _arguments: string[] = []
+    let _arguments: string[] = getConstructorArguments()
     let nifty = await deployments.deploy('Nifty', {
         from: deployer,
-        args: [],
+        args: _arguments,
         log: true,
         waitConfirmations: numberOfConfirmationsToWaitForDeploy
     })
@@ -27,6 +27,10 @@ let deploy: DeployFunction = async ({
     if (!DEVELOPMENT_CHAINS.includes(network.name)) {
         await verify(nifty.address, _arguments)
     }
+}
+
+export function getConstructorArguments(): string[] {
+    return []
 }
 
 deploy.tags = ['all', 'nifty']

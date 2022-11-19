@@ -5,11 +5,15 @@ coverage.json
 typechain
 typechain-types
 
-#Hardhat files
+# Hardhat files
 cache
 artifacts
 gasReport.txt
 coverage.json
 coverage
 deployments/localhost
+
+# The Graph files
+build
+generated
 

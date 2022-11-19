@@ -16,6 +16,7 @@ contract Nifty {
     struct Listing {
         uint price;
         address seller;
+        bool isOpen;
     }
 
     uint public numberOfListings = 0;
@@ -81,7 +82,7 @@ contract Nifty {
     }
 
     modifier nftIsUnlisted(address nftAddress, uint nftId) {
-        if (listingByNftIdByNftAddress[nftAddress][nftId].price > 0) {
+        if (listingByNftIdByNftAddress[nftAddress][nftId].isOpen) {
             revert NftAlreadyListed();
         }
         _;
@@ -119,7 +120,11 @@ contract Nifty {
         nftIsUnlisted(nftAddress, nftId)
     {
         address seller = msg.sender;
-        listingByNftIdByNftAddress[nftAddress][nftId] = Listing(price, seller);
+        listingByNftIdByNftAddress[nftAddress][nftId] = Listing(
+            price,
+            seller,
+            true // isOpen
+        );
         numberOfListings++;
 
         emit NftListed(nftAddress, nftId, price, seller);

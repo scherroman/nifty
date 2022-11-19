@@ -100,6 +100,7 @@ if (DEVELOPMENT_CHAINS.includes(network.name)) {
 
                 expect(listing.price).to.equal(NFT_LISTING_PRICE)
                 expect(listing.seller).to.equal(deployer)
+                expect(listing.isOpen).to.be.true
                 expect(numberOfListings).to.equal(1)
                 await expect(transaction).to.emit(nifty, 'NftListed')
                 expect(nftListedEvent?.args?.nftAddress).to.equal(nftAddress)
@@ -219,6 +220,7 @@ if (DEVELOPMENT_CHAINS.includes(network.name)) {
                 expect(listing.seller).to.equal(
                     '0x0000000000000000000000000000000000000000'
                 )
+                expect(listing.isOpen).to.be.false
                 expect(numberOfListings).to.equal(0)
                 await expect(transaction).to.emit(nifty, 'NftUnlisted')
                 expect(nftUnlistedEvent?.args?.nftAddress).to.equal(nftAddress)
@@ -269,6 +271,7 @@ if (DEVELOPMENT_CHAINS.includes(network.name)) {
                 expect(listing.seller).to.equal(
                     '0x0000000000000000000000000000000000000000'
                 )
+                expect(listing.isOpen).to.be.false
                 expect(numberOfListings).to.equal(0)
                 expect(newOwner).to.equal(user)
                 await expect(transaction).to.emit(nifty, 'NftBought')

@@ -3,7 +3,7 @@ import { BigNumber } from 'ethers'
 
 import { BasicNft, Nifty } from '../typechain-types'
 
-const NFT_LISTING_PRICE = ethers.utils.parseEther('0.1')
+const NFT_LISTING_PRICE = ethers.utils.parseEther('0.01')
 
 async function main(): Promise<void> {
     let nifty = await ethers.getContract<Nifty>('Nifty')
