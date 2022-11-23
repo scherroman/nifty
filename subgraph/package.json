@@ -3,8 +3,10 @@
     "license": "UNLICENSED",
     "scripts": {
         "codegen": "graph codegen",
-        "build:staging": "graph build --network goerli",
-        "deploy:staging": "graph deploy --node https://api.studio.thegraph.com/deploy/ nifty-staging --network goerli",
+        "build:staging": "npm run codegen && graph build --network goerli",
+        "build:production": "npm run codegen && graph build --network mainnet",
+        "deploy:staging": "npm run build:staging && npm run test && graph deploy --node https://api.studio.thegraph.com/deploy/ nifty-staging --network goerli",
+        "deploy:production": "npm run build:production && npm run test && graph deploy --node https://api.studio.thegraph.com/deploy/ nifty --network mainnet",
         "create-local": "graph create --node http://localhost:8020/ nifty-staging",
         "remove-local": "graph remove --node http://localhost:8020/ nifty-staging",
         "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 nifty-staging",
