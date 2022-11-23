@@ -4,7 +4,9 @@ A nifty marketplace for NFTs
 
 ## Overview
 
-Nifty allows users to list nfts, buy nfts, cancel listings, update listings, and withdraw proceeds.
+Nifty is an [Ethereum](https://ethereum.org) smart contract that allows users to list and buy nfts. It also has a subgraph deployed on [The Graph Network](https://thegraph.com) to enable rich GraphQL queries.
+
+[View testnet contract](https://goerli.etherscan.io/address/0x6d07fee70a994c7eadde02e14a43b7cdd6f6e9d2)
 
 ## Setup
 
