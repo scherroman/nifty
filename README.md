@@ -85,6 +85,18 @@ npm run test
 npm run test:unit
 ```
 
+**Run contract unit tests**
+
+```
+npm run test:contract:unit
+```
+
+**Run subgraph tests**
+
+```
+npm run test:subgraph
+```
+
 **Run integration tests**
 
 ```

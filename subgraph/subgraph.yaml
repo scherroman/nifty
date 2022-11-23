@@ -1,0 +1,32 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Nifty
+    network: goerli
+    source:
+      abi: Nifty
+      address: "0x6D07Fee70a994c7eadde02E14A43B7cdd6f6E9d2"
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ListingUpdated
+        - NftBought
+        - NftListed
+        - NftUnlisted
+      abis:
+        - name: Nifty
+          file: ./abis/Nifty.json
+      eventHandlers:
+        - event: ListingUpdated(indexed address,indexed uint256,uint256,address)
+          handler: handleListingUpdated
+        - event: NftBought(indexed address,indexed uint256,address,uint256)
+          handler: handleNftBought
+        - event: NftListed(indexed address,indexed uint256,uint256,address)
+          handler: handleNftListed
+        - event: NftUnlisted(indexed address,indexed uint256)
+          handler: handleNftUnlisted
+      file: ./src/nifty.ts

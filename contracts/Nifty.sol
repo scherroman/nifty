@@ -40,8 +40,8 @@ contract Nifty {
     event NftBought(
         address indexed nftAddress,
         uint indexed nftId,
-        address buyer,
-        uint price
+        uint price,
+        address buyer
     );
 
     modifier listingPriceProvided(uint price) {
@@ -176,7 +176,7 @@ contract Nifty {
         proceeds[listing.seller] += listing.price;
         _unlistNft(nftAddress, nftId);
 
-        emit NftBought(nftAddress, nftId, buyer, listing.price);
+        emit NftBought(nftAddress, nftId, listing.price, buyer);
 
         nft.safeTransferFrom(listing.seller, buyer, nftId);
 

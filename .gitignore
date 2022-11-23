@@ -16,4 +16,5 @@ deployments/localhost
 # The Graph files
 build
 generated
+.bin
 

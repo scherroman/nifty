@@ -1,26 +1,34 @@
-import { Address, BigInt, Bytes, store } from '@graphprotocol/graph-ts'
 import {
-    ListingUpdated as ListingUpdatedEvent,
-    NftBought as NftBoughtEvent,
-    NftListed as NftListedEvent,
-    NftUnlisted as NftUnlistedEvent
+    Address,
+    BigInt,
+    Bytes,
+    store,
+    ethereum
+} from '@graphprotocol/graph-ts'
+import {
+    NftListed,
+    ListingUpdated,
+    NftBought,
+    NftUnlisted
 } from '../generated/Nifty/Nifty'
 import {
     Listing,
-    NftListedEvent as NftListedEventEntity,
-    ListingUpdatedEvent as ListingUpdatedEventEntity,
-    NftBoughtEvent as NftBoughtEventEntity,
-    NftUnlistedEvent as NftUnlistedEventEntity
+    NftListedEvent,
+    ListingUpdatedEvent,
+    NftBoughtEvent,
+    NftUnlistedEvent
 } from '../generated/schema'
 
-function getListingId(nftAddress: Address, nftId: BigInt): Bytes {
+export function getEventId(event: ethereum.Event): Bytes {
+    return event.transaction.hash.concatI32(event.logIndex.toI32())
+}
+
+export function getListingId(nftAddress: Address, nftId: BigInt): Bytes {
     return Bytes.fromUTF8(`${nftAddress}-${nftId}`)
 }
 
-export function handleNftListed(event: NftListedEvent): void {
-    let nftListedEvent = new NftListedEventEntity(
-        event.transaction.hash.concatI32(event.logIndex.toI32())
-    )
+export function handleNftListed(event: NftListed): void {
+    let nftListedEvent = new NftListedEvent(getEventId(event))
 
     let params = event.params
     let block = event.block
@@ -51,10 +59,8 @@ export function handleNftListed(event: NftListedEvent): void {
     listing.save()
 }
 
-export function handleListingUpdated(event: ListingUpdatedEvent): void {
-    let listingUpdatedEvent = new ListingUpdatedEventEntity(
-        event.transaction.hash.concatI32(event.logIndex.toI32())
-    )
+export function handleListingUpdated(event: ListingUpdated): void {
+    let listingUpdatedEvent = new ListingUpdatedEvent(getEventId(event))
 
     let params = event.params
     let block = event.block
@@ -84,10 +90,8 @@ export function handleListingUpdated(event: ListingUpdatedEvent): void {
     listingUpdatedEvent.save()
 }
 
-export function handleNftBought(event: NftBoughtEvent): void {
-    let nftBoughtEvent = new NftBoughtEventEntity(
-        event.transaction.hash.concatI32(event.logIndex.toI32())
-    )
+export function handleNftBought(event: NftBought): void {
+    let nftBoughtEvent = new NftBoughtEvent(getEventId(event))
 
     nftBoughtEvent.nftAddress = event.params.nftAddress
     nftBoughtEvent.nftId = event.params.nftId
@@ -100,10 +104,8 @@ export function handleNftBought(event: NftBoughtEvent): void {
     nftBoughtEvent.save()
 }
 
-export function handleNftUnlisted(event: NftUnlistedEvent): void {
-    let nftUnlistedEvent = new NftUnlistedEventEntity(
-        event.transaction.hash.concatI32(event.logIndex.toI32())
-    )
+export function handleNftUnlisted(event: NftUnlisted): void {
+    let nftUnlistedEvent = new NftUnlistedEvent(getEventId(event))
 
     let params = event.params
     let block = event.block

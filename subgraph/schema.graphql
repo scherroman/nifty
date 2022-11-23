@@ -23,8 +23,8 @@ type NftBoughtEvent @entity(immutable: true) {
     id: Bytes!
     nftAddress: Bytes! # address
     nftId: BigInt! # uint256
-    buyer: Bytes! # address
     price: BigInt! # uint256
+    buyer: Bytes! # address
     blockNumber: BigInt!
     blockTimestamp: BigInt!
     transactionHash: Bytes!

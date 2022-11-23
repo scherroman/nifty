@@ -10,7 +10,7 @@
         "mocha": true
     },
     "plugins": ["@typescript-eslint"],
-    "ignorePatterns": ["subgraphs"],
+    "ignorePatterns": ["subgraph"],
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
