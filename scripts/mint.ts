@@ -1,15 +1,7 @@
-import { ethers } from 'hardhat'
-
-import { BasicNft } from '../typechain-types'
+import { mint } from '../utilities/contract'
 
 async function main(): Promise<void> {
-    let basicNft = await ethers.getContract<BasicNft>('BasicNft')
-
-    console.log('Minting NFT...')
-
-    await (await basicNft.mintNft()).wait(1)
-
-    console.log('NFT minted!')
+    await mint()
 }
 
 main().catch((error) => {

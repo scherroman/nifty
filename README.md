@@ -1,5 +1,7 @@
 # Nifty
 
+A nifty marketplace for NFTs
+
 ## Overview
 
 Nifty allows users to list nfts, buy nfts, cancel listings, update listings, and withdraw proceeds.
@@ -16,41 +18,30 @@ npm install --force
 
 Add the following environment variables:
 
--   GOERLI_RPC_URL - Using [Alchemy](https://dashboard.alchemy.com) is recommended
--   DEPLOYER_PRIVATE_KEY - Creating a fresh Metamask wallet just for development, without any real funds is recommended
--   ETHERSCAN_API_KEY - See [Etherscan API](https://docs.etherscan.io/getting-started/viewing-api-usage-statistics)
--   COINMARKETCAP_API_KEY - Optional, add to output gas report prices in USD. See [CoinMarketCap API](https://coinmarketcap.com/api)
--   SHOULD_UPDATE_FRONT_END - Optional, add and set to true to export contract addresses and ABIs to the frontend, false otherwise
-
-## Usage
-
-**Estimate gas for a transaction**
-
-1. Deploy contracts locally
-
-```
-npm run deploy:development
-```
-
-2. Run `estimateGas` script
-
-```
-npm run run-script:development scripts/estimateGas.ts
-```
-
-**Report gas usage for tests**
-
-```
-npm run report-gas-usage
-```
+-   `GOERLI_RPC_URL` - Using [Alchemy](https://dashboard.alchemy.com) is recommended
+-   `DEPLOYER_PRIVATE_KEY` - Creating a fresh Metamask wallet just for development, without any real funds is recommended
+-   `ETHERSCAN_API_KEY` - See [Etherscan API](https://docs.etherscan.io/getting-started/viewing-api-usage-statistics)
+-   `COINMARKETCAP_API_KEY` - Optional, add to output gas report prices in USD. See [CoinMarketCap API](https://coinmarketcap.com/api)
+-   `SHOULD_UPDATE_FRONT_END` - Optional, add and set to true to export contract addresses and ABIs to the frontend, false otherwise
 
 ## Building
 
-**Build The Graph subgraph**
+**Build contracts**
 
 ```
-cd subgraph/staging`
-npx graph codegen
+npm run build:contracts
+```
+
+**Build testnet subgraph**
+
+```
+npm run build:subgraph:staging
+```
+
+**Build mainnet subgraph**
+
+```
+npm run build:subgraph:production
 ```
 
 ## Testing
@@ -73,34 +64,34 @@ npm run typecheck
 npm run staticcheck
 ```
 
-**Run tests**
+**Run contract unit tests**
 
 ```
-npm run test
+npm run test:contracts:unit
 ```
 
-**Run unit tests**
+**Run subgraph unit tests**
+
+```
+npm run test:subgraph:unit
+```
+
+**Run all unit tests**
 
 ```
 npm run test:unit
 ```
 
-**Run contract unit tests**
+**Run all tests**
 
 ```
-npm run test:contract:unit
+npm run test
 ```
 
-**Run subgraph tests**
+**Run all static checks and unit tests**
 
 ```
-npm run test:subgraph
-```
-
-**Run integration tests**
-
-```
-npm run test:integration
+npm run check:unit
 ```
 
 **Run all checks**
@@ -109,30 +100,64 @@ npm run test:integration
 npm run check
 ```
 
+## Scripts
+
+**Run a custom script**
+
+```
+npm run script:<environment> scripts/<script>.ts
+```
+
+**Estimate gas for a transaction**
+
+1. Deploy contracts locally
+
+```
+npm run deploy:contracts:development
+```
+
+2. Run `estimateGas` script
+
+```
+npm run script:development scripts/estimateGas.ts
+```
+
+**Report gas usage for tests**
+
+```
+npm run report-gas-usage
+```
+
 ## Deployment
 
-**Deploy locally**
+**Deploy contracts locally**
 
 ```
-npm run deploy:development
+npm run deploy:contracts:development
 ```
 
-**Deploy to testnet**
+**Deploy contracts to testnet**
 
 ```
-npm run deploy:staging
+npm run deploy:contracts:staging
 ```
 
 **Deploy subgraph to testnet**
 
 ```
-npm run deploy-subgraph:staging
+npm run deploy:subgraph:staging
 ```
 
-**Deploy to mainnet**
+**Deploy contracts to mainnet**
 
 ```
-npm run deploy:production
+npm run deploy:contracts:production
+```
+
+**Deploy subgraph to mainnet**
+
+```
+npm run deploy:subgraph:production
 ```
 
 ## Notes
@@ -149,7 +174,7 @@ To enable or disable updating the frontend contract addresses and ABIs automatic
 graph init --studio nifty-staging
 ```
 
-When setting up a new subgraph under the `subgraphs` directory, delete the `.git` submodule that is created there so that the subgraph is tracked within this repository.
+When setting up a new subgraph under the `subgraphs` directory, delete the `.git` submodule that is created there so that the subgraph is tracked directly rather than as a submodule.
 
 ## Troubleshooting
 

@@ -1,7 +1,7 @@
 import { ethers } from 'hardhat'
-import { BigNumber } from 'ethers'
 
 import { BasicNft, Nifty } from '../typechain-types'
+import { mint } from '../utilities/contract'
 
 const NFT_LISTING_PRICE = ethers.utils.parseEther('0.01')
 
@@ -11,19 +11,7 @@ async function main(): Promise<void> {
 
     console.log('Minting NFT...')
 
-    let transaction = await basicNft.mintNft()
-    let receipt = await transaction.wait(1)
-    let nftMintedEvent = receipt.events?.find(
-        (event) => event.event === 'NftMinted'
-    )
-
-    let nftId
-    let _nftId: unknown = nftMintedEvent?.args?.id
-    if (_nftId instanceof BigNumber) {
-        nftId = _nftId
-    } else {
-        throw new Error(`Invalid NFT id ${_nftId}`)
-    }
+    let nftId = await mint()
 
     console.log('Listing NFT...')
 
