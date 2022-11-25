@@ -13,8 +13,9 @@ coverage.json
 coverage
 deployments/localhost
 
-# The Graph files
-build
-generated
-.bin
+# Subgraph files
+subgraph/build
+subgraph/generated
+subgraph/tests/.bin
+subgraph/tests/.latest.json
 
