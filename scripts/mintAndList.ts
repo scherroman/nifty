@@ -9,8 +9,6 @@ async function main(): Promise<void> {
     let nifty = await ethers.getContract<Nifty>('Nifty')
     let basicNft = await ethers.getContract<BasicNft>('BasicNft')
 
-    console.log('Minting NFT...')
-
     let nftId = await mint()
 
     console.log('Listing NFT...')

@@ -1,7 +1,12 @@
+type Nft @entity {
+    id: Bytes!
+    address: Bytes!
+    tokenId: BigInt!
+}
+
 type Listing @entity {
     id: Bytes!
-    nftAddress: Bytes!
-    nftId: BigInt!
+    nft: Nft!
     price: BigInt!
     seller: Bytes!
     createdAt: BigInt!
@@ -10,8 +15,7 @@ type Listing @entity {
 
 type ListingUpdatedEvent @entity(immutable: true) {
     id: Bytes!
-    nftAddress: Bytes! # address
-    nftId: BigInt! # uint256
+    nft: Nft!
     price: BigInt! # uint256
     seller: Bytes! # address
     blockNumber: BigInt!
@@ -21,8 +25,7 @@ type ListingUpdatedEvent @entity(immutable: true) {
 
 type NftBoughtEvent @entity(immutable: true) {
     id: Bytes!
-    nftAddress: Bytes! # address
-    nftId: BigInt! # uint256
+    nft: Nft!
     price: BigInt! # uint256
     buyer: Bytes! # address
     blockNumber: BigInt!
@@ -32,8 +35,7 @@ type NftBoughtEvent @entity(immutable: true) {
 
 type NftListedEvent @entity(immutable: true) {
     id: Bytes!
-    nftAddress: Bytes! # address
-    nftId: BigInt! # uint256
+    nft: Nft!
     price: BigInt! # uint256
     seller: Bytes! # address
     blockNumber: BigInt!
@@ -43,8 +45,7 @@ type NftListedEvent @entity(immutable: true) {
 
 type NftUnlistedEvent @entity(immutable: true) {
     id: Bytes!
-    nftAddress: Bytes! # address
-    nftId: BigInt! # uint256
+    nft: Nft!
     blockNumber: BigInt!
     blockTimestamp: BigInt!
     transactionHash: Bytes!
