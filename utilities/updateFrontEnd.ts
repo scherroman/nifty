@@ -5,12 +5,13 @@ import { ethers, network } from 'hardhat'
 import { Nifty } from '../typechain-types'
 
 // const TYPES_FOLDER = `typechain-types`
-const FRONT_END_NIFTY_CONTRACT_FOLDER = '../nifty-web/contracts/nifty'
+const FRONT_END_CONTRACTS_FOLDER = '../nifty-web/source/contracts'
+const FRONT_END_NIFTY_CONTRACT_FOLDER = `${FRONT_END_CONTRACTS_FOLDER}/nifty`
 const FRONT_END_NIFTY_ADDRESSES_FILE = `${FRONT_END_NIFTY_CONTRACT_FOLDER}/addresses.json`
 const FRONT_END_NIFTY_ABI_FILE = `${FRONT_END_NIFTY_CONTRACT_FOLDER}/abi.ts`
 // const FRONT_END_TYPES_FOLDER = `${FRONT_END_NIFTY_CONTRACT_FOLDER}/types`
 
-const FRONT_END_ERC721_INTERFACE_FOLDER = '../nifty-web/contracts/ierc721'
+const FRONT_END_ERC721_INTERFACE_FOLDER = `${FRONT_END_CONTRACTS_FOLDER}/ierc721`
 const FRONT_END_ERC721_ABI_FILE = `${FRONT_END_ERC721_INTERFACE_FOLDER}/abi.ts`
 
 const ContractAddressesByChainId = zod.record(zod.string(), zod.string())

@@ -1,6 +1,7 @@
 {
     "scripts": {
-        "postinstall": "cd graph/staging && npm install",
+        "prepare": "husky install",
+        "postinstall": "cd subgraph && npm install",
         "eslint": "eslint tests scripts deployment utilities configuration hardhat.config.ts --ext .ts",
         "solhint": "solhint contracts/**/*.sol",
         "lint": "npm run eslint && npm run solhint",
@@ -44,6 +45,7 @@
         "hardhat": "2.11.2",
         "hardhat-deploy": "0.11.15",
         "hardhat-gas-reporter": "1.0.9",
+        "husky": "8.0.2",
         "prettier": "2.7.1",
         "prettier-plugin-solidity": "1.0.0-beta.24",
         "solhint": "3.3.7",

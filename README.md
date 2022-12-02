@@ -178,6 +178,20 @@ graph init --studio nifty-staging
 
 When setting up a new subgraph under the `subgraphs` directory, delete the `.git` submodule that is created there so that the subgraph is tracked directly rather than as a submodule.
 
+### Pre-commit Hooks
+
+All checks are run locally automatically before a commit is made using `npm run check`.
+
+**Modify the existing pre-commit hook**
+
+Edit the [.husky/pre-commit](.husky/pre-commit) file
+
+**Add a pre-commit hook**
+
+`npx husky add .husky/pre-commit "npm run check"`
+
+See the [Husky Documentation](https://typicode.github.io/husky/#/)to learn more on how to configure pre-commit hooks.
+
 ## Troubleshooting
 
 ### Errors when installing dependencies
