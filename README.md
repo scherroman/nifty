@@ -106,7 +106,7 @@ npm run check
 
 **1. Install [Miniconda](http://conda.pydata.org/miniconda.html)**
 
-Miniconda helps create an isolated virtual environment and install the tools we use for security analysis across platforms.
+Miniconda helps create an isolated virtual environment and install the tools we use for security analysis.
 
 **Set up the nifty virtual environment**
 
@@ -118,6 +118,12 @@ npm run analyze:setup
 
 ```
 npm run analyze:slither
+```
+
+**Run mythril security analysis**
+
+```
+npm run analyze:mythril
 ```
 
 **Run all security analysis tools**
