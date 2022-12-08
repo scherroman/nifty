@@ -6,7 +6,9 @@ A nifty marketplace for NFTs
 
 Nifty is an [Ethereum](https://ethereum.org) smart contract that allows users to list and buy NFTs. It also has an indexed subgraph deployed on [The Graph Network](https://thegraph.com) to enable rich GraphQL queries.
 
-[View testnet contract](https://goerli.etherscan.io/address/0x6d07fee70a994c7eadde02e14a43b7cdd6f6e9d2)
+[View testnet contract](https://goerli.etherscan.io/address/0x3E5d4F330C059b2Df5B19d6F9E188c74E5aA165b)
+
+[View testnet subgraph](https://thegraph.com/studio/subgraph/nifty-staging)
 
 ## Setup
 
