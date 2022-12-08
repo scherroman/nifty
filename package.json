@@ -1,7 +1,7 @@
 {
     "scripts": {
         "prepare": "husky install",
-        "postinstall": "cd subgraph && npm install",
+        "postinstall": "cd subgraph && npm install && docker pull ghcr.io/crytic/echidna/echidna:v2.0.4",
         "eslint": "eslint tests scripts deployment utilities configuration hardhat.config.ts --ext .ts",
         "solhint": "solhint contracts/**/*.sol",
         "lint": "npm run eslint && npm run solhint",
@@ -12,8 +12,9 @@
         "build:subgraph:production": "cd subgraph && npm run build:production",
         "update-frontend": "hardhat run scripts/updateFrontEnd.ts --network localhost",
         "test:contracts:unit": "hardhat coverage --network hardhat",
+        "test:contracts:property": "docker run --rm -v `pwd`:/nifty ghcr.io/crytic/echidna/echidna:v2.0.4 bash -c \"solc-select install 0.8.17 && solc-select use 0.8.17 && echidna-test /nifty/tests/property/Nifty.test.sol --contract NiftyTest --config /nifty/tests/property/config.yaml\"",
         "test:subgraph:unit": "cd subgraph && npm run test",
-        "test:unit": "npm run test:contracts:unit && npm run test:subgraph:unit",
+        "test:unit": "npm run test:contracts:unit && npm run test:subgraph:unit && npm run test:contracts:property",
         "test:contracts:integration": "hardhat test --network goerli",
         "test:integration": "npm run test:contracts:integration",
         "test": "npm run test:unit && npm run test:integration",
@@ -58,7 +59,6 @@
         "zod": "3.19.1"
     },
     "dependencies": {
-        "@chainlink/contracts": "0.5.1",
         "@openzeppelin/contracts": "4.7.3"
     }
 }

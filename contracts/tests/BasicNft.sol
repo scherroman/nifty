@@ -12,7 +12,9 @@ contract BasicNft is ERC721 {
 
     event NftMinted(uint indexed id, address indexed minter);
 
-    constructor() ERC721(NAME, SYMBOL) {}
+    constructor() ERC721(NAME, SYMBOL) {
+        // solhint-disable-previous-line no-empty-blocks
+    }
 
     function tokenURI(
         uint /* tokenId */

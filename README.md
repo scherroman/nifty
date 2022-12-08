@@ -10,13 +10,15 @@ Nifty is an [Ethereum](https://ethereum.org) smart contract that allows users to
 
 ## Setup
 
-**1. Install dependencies**
+**1. Install and start [Docker](https://www.docker.com/products/docker-desktop/)**
+
+**2. Install dependencies**
 
 ```
 npm install --force
 ```
 
-**2. Create a `.env` file**
+**3. Create a `.env` file**
 
 Add the following environment variables:
 
@@ -70,6 +72,12 @@ npm run staticcheck
 
 ```
 npm run test:contracts:unit
+```
+
+**Run contract property tests**
+
+```
+npm run test:contracts:property
 ```
 
 **Run subgraph unit tests**

@@ -1,0 +1,8 @@
+testLimit: 10000
+cryticArgs:
+    [
+        '--solc-remaps',
+        '@openzeppelin=/nifty/node_modules/@openzeppelin',
+        '--solc-args',
+        '--allow-paths /nifty/tests/property'
+    ]
