@@ -190,20 +190,36 @@ npm run deploy:contracts:staging
 
 **Deploy subgraph to testnet**
 
+1\) Update the subgraph's testnet Nifty contract address in [subgraph/networks.json](subgraph/networks.json)
+
+2\) Deploy the subgraph
+
 ```
+
 npm run deploy:subgraph:staging
+
+```
+
+3\) Increase the subgraph's version by checking it's current version on [Subgraph Studio](https://thegraph.com/studio)
+
+```
+Version Label (e.g. 0.0.1) › ...
 ```
 
 **Deploy contracts to mainnet**
 
 ```
+
 npm run deploy:contracts:production
+
 ```
 
 **Deploy subgraph to mainnet**
 
 ```
+
 npm run deploy:subgraph:production
+
 ```
 
 ## Notes
@@ -217,7 +233,9 @@ To enable or disable updating the frontend contract addresses and ABIs automatic
 ### The Graph Initial Setup
 
 ```
+
 graph init --studio nifty-staging
+
 ```
 
 When setting up a new subgraph under the `subgraphs` directory, delete the `.git` submodule that is created there so that the subgraph is tracked directly rather than as a submodule.
@@ -227,7 +245,9 @@ When setting up a new subgraph under the `subgraphs` directory, delete the `.git
 To launch the echidna docker container in interactive mode, at `-it` to the `docker run` options:
 
 ```
+
 docker run --rm -it -v `pwd`:/nifty ghcr.io/crytic/echidna/echidna:v2.0.4
+
 ```
 
 This can let you inspect the internals of the docker container manually, and/or run `echidna-test` with more friendly visual feedback.
@@ -251,3 +271,7 @@ See the [Husky Documentation](https://typicode.github.io/husky/#/)to learn more 
 ### Errors when installing dependencies
 
 There is currently [an issue](https://github.com/wighawag/hardhat-deploy-ethers/issues/27) with the `"@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@0.3.0-beta.13",` package which causes errors when trying to update or install new packages. Use `--force` to override these errors.
+
+```
+
+```
