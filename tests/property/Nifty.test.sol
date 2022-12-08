@@ -11,4 +11,12 @@ contract NiftyTest is Nifty {
     {
         return numberOfListings >= 0;
     }
+
+    function echidna_seller_proceeds_is_always_at_or_less_than_contract_balance()
+        public
+        view
+        returns (bool)
+    {
+        return proceeds[msg.sender] <= address(this).balance;
+    }
 }

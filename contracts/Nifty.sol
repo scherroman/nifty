@@ -148,7 +148,10 @@ contract Nifty {
         emit ListingUpdated(nftAddress, nftId, price, seller);
     }
 
-    function unlistNft(address nftAddress, uint nftId)
+    function unlistNft(
+        address nftAddress,
+        uint nftId
+    )
         external
         isNftOwner(nftAddress, nftId, msg.sender)
         nftIsListed(nftAddress, nftId)
@@ -163,7 +166,10 @@ contract Nifty {
         emit NftUnlisted(nftAddress, nftId);
     }
 
-    function buyNft(address nftAddress, uint nftId)
+    function buyNft(
+        address nftAddress,
+        uint nftId
+    )
         external
         payable
         nftIsListed(nftAddress, nftId)
@@ -172,6 +178,7 @@ contract Nifty {
         address buyer = msg.sender;
         IERC721 nft = IERC721(nftAddress);
         Listing memory listing = listingByNftIdByNftAddress[nftAddress][nftId];
+        uint initialSellerProceeds = proceeds[listing.seller];
 
         proceeds[listing.seller] += listing.price;
         _unlistNft(nftAddress, nftId);
@@ -181,14 +188,21 @@ contract Nifty {
         nft.safeTransferFrom(listing.seller, buyer, nftId);
 
         assert(nft.ownerOf(nftId) == buyer);
+        assert(
+            proceeds[listing.seller] == initialSellerProceeds + listing.price
+        );
     }
 
     function withdrawProceeds() external hasProceeds(msg.sender) {
+        uint initialContractBalance = address(this).balance;
         uint userProceeds = proceeds[msg.sender];
         proceeds[msg.sender] = 0;
         (bool success, ) = msg.sender.call{value: userProceeds}('');
         if (!success) {
             revert WithdrawProceedsFailed();
         }
+
+        assert(address(this).balance == initialContractBalance - userProceeds);
+        assert(proceeds[msg.sender] == 0);
     }
 }

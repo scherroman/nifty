@@ -80,6 +80,12 @@ npm run test:contracts:unit
 npm run test:contracts:property
 ```
 
+**Run contract assertion tests**
+
+```
+npm run test:contracts:assertion
+```
+
 **Run subgraph unit tests**
 
 ```
@@ -215,6 +221,16 @@ graph init --studio nifty-staging
 ```
 
 When setting up a new subgraph under the `subgraphs` directory, delete the `.git` submodule that is created there so that the subgraph is tracked directly rather than as a submodule.
+
+## Run Echidna in interactive mode
+
+To launch the echidna docker container in interactive mode, at `-it` to the `docker run` options:
+
+```
+docker run --rm -it -v `pwd`:/nifty ghcr.io/crytic/echidna/echidna:v2.0.4
+```
+
+This can let you inspect the internals of the docker container manually, and/or run `echidna-test` with more friendly visual feedback.
 
 ### Pre-commit Hooks
 
