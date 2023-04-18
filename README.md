@@ -273,7 +273,3 @@ See the [Husky Documentation](https://typicode.github.io/husky/#/)to learn more 
 ### Errors when installing dependencies
 
 There is currently [an issue](https://github.com/wighawag/hardhat-deploy-ethers/issues/27) with the `"@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@0.3.0-beta.13",` package which causes errors when trying to update or install new packages. Use `--force` to override these errors.
-
-```
-
-```
